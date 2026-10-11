@@ -46,6 +46,34 @@ The API will be available at:
 http://localhost:4000
 ```
 
+## Docker Compose
+
+Docker is supported for running the full application stack. The Compose setup starts:
+
+- The React/Vite client at `http://localhost:5173`
+- The Node.js API at `http://localhost:4000`
+- MongoDB 7 with data persisted in the `mongo_data` volume
+
+Create a `.env` file in the project root with the JWT secret used by the backend:
+
+```env
+JWT_SECRET_KEY=replace-with-a-long-random-secret
+```
+
+Start all services:
+
+```bash
+docker compose up --build
+```
+
+Stop the services:
+
+```bash
+docker compose down
+```
+
+The backend connects to MongoDB through the Compose service name `mongodb`. When running the API directly with `npm start`, `MONGO_URL` can be set to a local MongoDB connection string as shown in the installation example.
+
 ## Authentication
 
 Signup and login return a JWT token. Send that token with protected requests:

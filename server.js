@@ -6,7 +6,7 @@ import { app } from "./src/index.js";
 env.config();
 
 const PORT = process.env.PORT || 4000;
-const MONGO_URL = process.env.MONGO_URL || 4000;
+const MONGO_URL = process.env.MONGO_URL || "mongodb://mongodb:27017/attendance-tracer";
 const server = http.createServer(app);
 
 await connectToMongo(MONGO_URL).catch((error)=>{
