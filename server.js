@@ -16,5 +16,5 @@ await connectToMongo(MONGO_URL).catch((error)=>{
 
 server.listen(PORT,()=>{
    console.log("Server Runnig On Port : ",PORT);
-   
+
 })
