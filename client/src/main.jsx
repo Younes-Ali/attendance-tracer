@@ -100,8 +100,9 @@ function AuthPage({ view, setView, onAuthenticated }) {
     event.preventDefault();
     setLoading(true);
     setError("");
-    const form = new FormData(event.currentTarget);
+    
     const values = Object.fromEntries(form.entries());
+    const form = new FormData(event.currentTarget);
     try {
       const nextUser =
         view === "login" ? await login(values) : await signup(values);
@@ -340,13 +341,14 @@ function Workspace({ user, onLogout }) {
 }
 
 function TeacherPages({ activePage }) {
+  
+  const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
+  const [modal, setModal] = useState(null);
   const [classes, setClasses] = useState([]);
   const [selectedClass, setSelectedClass] = useState(null);
   const [summary, setSummary] = useState(null);
   const [pageLoading, setPageLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [notice, setNotice] = useState("");
-  const [modal, setModal] = useState(null);
   const [attendanceDate, setAttendanceDate] = useState(
     new Date().toISOString().slice(0, 10),
   );
@@ -1283,6 +1285,15 @@ function ClassModal({ mode, item, onClose, onSave }) {
     </div>
   );
 }
+
+function Status({ status }) {
+  return (
+    <span className={`status-pill ${String(status).toLowerCase()}`}>
+      <i /> {String(status).replace("_", " ")}
+    </span>
+  );
+}
+
 function Metric({ label, value, icon: Icon }) {
   return (
     <div className="metric-card">
@@ -1294,13 +1305,7 @@ function Metric({ label, value, icon: Icon }) {
     </div>
   );
 }
-function Status({ status }) {
-  return (
-    <span className={`status-pill ${String(status).toLowerCase()}`}>
-      <i /> {String(status).replace("_", " ")}
-    </span>
-  );
-}
+
 function Loading() {
   return <div className="loading">Loading live data...</div>;
 }
